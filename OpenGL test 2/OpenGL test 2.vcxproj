@@ -469,6 +469,8 @@
     <ClInclude Include="src\external\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\shaders\default.frag" />
+    <None Include="resources\shaders\default.vert" />
     <None Include="src\external\glm\detail\func_common.inl" />
     <None Include="src\external\glm\detail\func_common_simd.inl" />
     <None Include="src\external\glm\detail\func_exponential.inl" />
@@ -607,8 +609,21 @@
     <None Include="src\external\glm\gtx\vector_angle.inl" />
     <None Include="src\external\glm\gtx\vector_query.inl" />
     <None Include="src\external\glm\gtx\wrap.inl" />
-    <None Include="resources\shaders\default.frag" />
-    <None Include="resources\shaders\default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="resources\object\cubexyz.obj" />
+    <Object Include="resources\object\plane.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\object\abby.txt" />
+    <Text Include="resources\object\plane.txt" />
+    <Text Include="resources\object\sphere.txt" />
+    <Text Include="resources\object\teapot.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\textures\abbytexture.png" />
+    <Image Include="resources\textures\gray.png" />
+    <Image Include="resources\textures\woodFloor.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

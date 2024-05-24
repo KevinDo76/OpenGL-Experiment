@@ -1009,8 +1009,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\shaders\default.frag" />
-    <None Include="resources\shaders\default.vert" />
     <None Include="src\external\glm\detail\func_common.inl">
       <Filter>Header Files</Filter>
     </None>
@@ -1425,5 +1423,28 @@
     <None Include="src\external\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="resources\shaders\default.frag" />
+    <None Include="resources\shaders\default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="resources\object\cubexyz.obj" />
+    <Object Include="resources\object\plane.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\object\plane.txt" />
+    <Text Include="resources\object\abby.txt" />
+    <Text Include="resources\object\teapot.txt" />
+    <Text Include="resources\object\sphere.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\textures\abbytexture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\gray.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\woodFloor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
