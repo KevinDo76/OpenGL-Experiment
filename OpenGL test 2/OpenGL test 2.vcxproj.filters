@@ -1425,6 +1425,7 @@
     </None>
     <None Include="resources\shaders\default.frag" />
     <None Include="resources\shaders\default.vert" />
+    <None Include="..\..\..\..\Downloads\imgui-1.90.6.zip" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="resources\object\cubexyz.obj" />

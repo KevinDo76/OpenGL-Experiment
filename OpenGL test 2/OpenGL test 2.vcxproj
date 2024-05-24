@@ -469,6 +469,7 @@
     <ClInclude Include="src\external\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Downloads\imgui-1.90.6.zip" />
     <None Include="resources\shaders\default.frag" />
     <None Include="resources\shaders\default.vert" />
     <None Include="src\external\glm\detail\func_common.inl" />
