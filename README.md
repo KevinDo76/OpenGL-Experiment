@@ -1,4 +1,4 @@
-# OpenGL test 2
+# OpenGL-Experiment
 
 <p>This project is mainly based on:</p>
 <ul>
