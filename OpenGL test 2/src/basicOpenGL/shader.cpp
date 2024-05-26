@@ -67,7 +67,7 @@ static unsigned int compileShader(const std::string& src, GLenum type)
     return shaderID;
 }
 
-shader::shader(std::string vertexPath, std::string fragPath, float lightPointC)
+shader::shader(std::string vertexPath, std::string fragPath, float lightPointC, std::string geoPath)
     :lightPointCount(lightPointC)
 {
 
@@ -78,19 +78,33 @@ shader::shader(std::string vertexPath, std::string fragPath, float lightPointC)
     }
 
 
-
-    //|LIGHT_COUNT|
-
     std::string vertexSrc;
     std::string fragmentSrc;
+    std::string geometrySrc;
     readFile(vertexPath, vertexSrc);
     processFragShader(fragPath, fragmentSrc, lightPointCount);
+    if (geoPath.length() > 0)
+    {
+        readFile(geoPath, geometrySrc);
+
+    }
+    else
+    {
+        std::cout << "No geometry shader\n";
+    }
     unsigned int vertexID = compileShader(vertexSrc, GL_VERTEX_SHADER);
     unsigned int fragmentID = compileShader(fragmentSrc, GL_FRAGMENT_SHADER);
+    unsigned int geometryID = 0xffffffff;
 
     unsigned int programID = glCreateProgram();
     glAttachShader(programID, vertexID);
     glAttachShader(programID, fragmentID);
+
+    if (geoPath.length() > 0)
+    {
+        geometryID = compileShader(geometrySrc, GL_GEOMETRY_SHADER);
+        glAttachShader(programID, geometryID);
+    }
 
     glLinkProgram(programID);
 
@@ -112,10 +126,18 @@ shader::shader(std::string vertexPath, std::string fragPath, float lightPointC)
     {
         glDetachShader(programID, vertexID);
         glDetachShader(programID, fragmentID);
+        if (geoPath.length() > 0)
+        {
+            glDetachShader(programID, geometryID);
+        }
 
     }
     glDeleteShader(vertexID);
     glDeleteShader(fragmentID);
+    if (geoPath.length() > 0)
+    {
+        glDeleteShader(geometryID);
+    }
     id = programID;
 }
 

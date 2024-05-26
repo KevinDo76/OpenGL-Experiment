@@ -67,10 +67,10 @@ mesh::~mesh()
 void mesh::draw(shader& shaderProgram, camera& cameraObj, glm::vec2 dimension, material& mat)
 {
     glm::mat4 model = glm::mat4(1.0f);
-    glm::mat4 modelInverse;
+    glm::mat3 modelInverse;
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 proj = glm::mat4(1.0f);
-    glm::mat4 MVP;
+    glm::mat4 MV;
 
     //model transformation
     model = glm::scale(model, scale);
@@ -92,10 +92,11 @@ void mesh::draw(shader& shaderProgram, camera& cameraObj, glm::vec2 dimension, m
     modelInverse = glm::transpose(glm::inverse(model));
     //final matrix
 
-    MVP = proj * view * model;
+    MV = view * model;
     shaderProgram.bind();
     shaderProgram.setUniformMat4fv("u_Model", glm::value_ptr(model));
-    shaderProgram.setUniformMat4fv("u_MVP", glm::value_ptr(MVP));
+    shaderProgram.setUniformMat4fv("u_Projection", glm::value_ptr(proj));
+    shaderProgram.setUniformMat4fv("u_MV", glm::value_ptr(MV));
     shaderProgram.setUniform3f("viewPos", cameraObj.position.x, cameraObj.position.y, cameraObj.position.z);
     shaderProgram.setUniformMat3fv("u_InverseModel", glm::value_ptr(modelInverse));
 

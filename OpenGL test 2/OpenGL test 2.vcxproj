@@ -462,6 +462,7 @@
     <ClInclude Include="src\external\imgui\imgui.h" />
     <ClInclude Include="src\external\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="src\external\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\external\imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\external\imgui\imgui_internal.h" />
     <ClInclude Include="src\external\imgui\imstb_rectpack.h" />
     <ClInclude Include="src\external\imgui\imstb_textedit.h" />
@@ -471,6 +472,7 @@
   <ItemGroup>
     <None Include="..\..\..\..\Downloads\imgui-1.90.6.zip" />
     <None Include="resources\shaders\default.frag" />
+    <None Include="resources\shaders\default.geom" />
     <None Include="resources\shaders\default.vert" />
     <None Include="src\external\glm\detail\func_common.inl" />
     <None Include="src\external\glm\detail\func_common_simd.inl" />
@@ -610,16 +612,6 @@
     <None Include="src\external\glm\gtx\vector_angle.inl" />
     <None Include="src\external\glm\gtx\vector_query.inl" />
     <None Include="src\external\glm\gtx\wrap.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="resources\object\cubexyz.obj" />
-    <Object Include="resources\object\plane.obj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="resources\object\abby.txt" />
-    <Text Include="resources\object\plane.txt" />
-    <Text Include="resources\object\sphere.txt" />
-    <Text Include="resources\object\teapot.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\abbytexture.png" />

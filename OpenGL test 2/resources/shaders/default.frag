@@ -6,8 +6,8 @@ uniform sampler2D u_Texture;
 uniform mat3 u_InverseModel;
 
 in vec2 v_TexCoord;
-varying vec3 v_Normal;
-varying vec3 v_fragPos;
+in vec3 v_Normal;
+in vec3 v_fragPos;
 
 struct Material {
     vec3 ambient;

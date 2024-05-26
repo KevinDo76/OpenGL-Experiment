@@ -1007,6 +1007,9 @@
     <ClInclude Include="src\basicOpenGL\vertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\external\imgui\imgui_impl_opengl3_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\external\glm\detail\func_common.inl">
@@ -1426,16 +1429,7 @@
     <None Include="resources\shaders\default.frag" />
     <None Include="resources\shaders\default.vert" />
     <None Include="..\..\..\..\Downloads\imgui-1.90.6.zip" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="resources\object\cubexyz.obj" />
-    <Object Include="resources\object\plane.obj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="resources\object\plane.txt" />
-    <Text Include="resources\object\abby.txt" />
-    <Text Include="resources\object\teapot.txt" />
-    <Text Include="resources\object\sphere.txt" />
+    <None Include="resources\shaders\default.geom" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\abbytexture.png">

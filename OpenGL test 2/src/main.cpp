@@ -81,14 +81,14 @@ int main(void)
 
    
 
-    texture textureObj("resources/textures/woodFloor.png");
+    texture textureObj("resources/textures/backroom3.png");
 
-    shader shaderProgram("resources/shaders/default.vert", "resources/shaders/default.frag", 2);
+    shader shaderProgram("resources/shaders/default.vert", "resources/shaders/default.frag", 2, "resources/shaders/default.geom");
     shaderProgram.setUniform1i("u_Texture", 0);
 
 
     shaderProgram.lightPointArray[0].position = glm::vec3(0, 20, 0);
-    shaderProgram.lightPointArray[0].color = glm::vec3(0.992156863f, 0.984313725, 0.82745098);
+    shaderProgram.lightPointArray[0].color = glm::vec3(0.839215686f, 0.870588235f, 0.654901961f);
     shaderProgram.lightPointArray[0].activated = true;
     shaderProgram.lightPointArray[0].lightPower = 200;
 
@@ -97,7 +97,7 @@ int main(void)
     shaderProgram.unbind();
     textureObj.unbind();
 
-    mesh Teapot("resources/object/cubexyz.obj");
+    mesh Teapot("resources/object/backroom3.obj");
     //mesh abby("resources/object/abby.txt");
     camera cameraObj;
     material mat(glm::vec3(1), glm::vec3(1), glm::vec3(1), 1000);
@@ -116,7 +116,7 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 460");
 
-    float lightPow = 100;
+    float lightPow = 3;
 
     glm::vec3 rotationCube(0);
 
@@ -128,6 +128,7 @@ int main(void)
         double deltaTime = currenTime - lastTime;
         lastTime = currenTime;
 
+        shaderProgram.lightPointArray[0].position = cameraObj.position;
         
         if (!io.WantCaptureMouse)
         {
@@ -147,7 +148,7 @@ int main(void)
         glViewport(0, 0, width, height);
         
         //Teapot.rotation = glm::vec3(count/2.f, count/2.f, 0);
-        Teapot.scale = glm::vec3(1);
+        Teapot.scale = glm::vec3(2);
         //abby.scale = glm::vec3(20);
 
         textureObj.bind();
@@ -162,12 +163,14 @@ int main(void)
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0 / double(ImGui::GetIO().Framerate), double(ImGui::GetIO().Framerate));
         ImGui::Text("Camera Position: (%.3f, %.3f, %.3f)", (double)cameraObj.position.x, (double)cameraObj.position.y, (double)cameraObj.position.z);
         ImGui::Text("Camera Look Vector: (%.3f, %.3f, %.3f)", (double)cameraObj.lookVector.x, (double)cameraObj.lookVector.y, (double)cameraObj.lookVector.z);
-        ImGui::SliderFloat("Light Power", &lightPow, 0, 100000);
+        ImGui::SliderFloat("Light Power", &lightPow, 0, 1000);
         ImGui::Text("Cube Rotation:");
         ImGui::SliderFloat("X", &rotationCube.x, -180, 180);
         ImGui::SliderFloat("Y", &rotationCube.y, -180, 180);
         ImGui::SliderFloat("Z", &rotationCube.z, -180, 180);
         ImGui::End();
+
+        cameraObj.position.y = 1.8*2;
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

@@ -3,7 +3,7 @@
 class texture
 {
 public:
-	texture(const std::string& path);
+	texture(const std::string& pathColor, const std::string& pathNormal = "");
 	~texture();
 
 	void bind(unsigned int slot = 0) const;

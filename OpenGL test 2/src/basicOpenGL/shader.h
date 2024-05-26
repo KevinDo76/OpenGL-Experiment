@@ -6,7 +6,7 @@
 class shader
 {
 public:
-	shader(std::string vertexPath, std::string fragPath, float lightPointC);
+	shader(std::string vertexPath, std::string fragPath, float lightPointC, std::string geoPath="");
 	~shader();
 
 	void bind() const;

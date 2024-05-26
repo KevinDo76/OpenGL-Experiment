@@ -3,11 +3,11 @@
 
 #include "../external/stb_image/stb_image.h"
 
-texture::texture(const std::string& path)
+texture::texture(const std::string& pathColor, const std::string& pathNormal)
 	: path(path), dataBuffer(nullptr)
 {
 	stbi_set_flip_vertically_on_load(1);
-	dataBuffer = stbi_load(path.c_str(), &width, &height, &bitPerPixel, 4);
+	dataBuffer = stbi_load(pathColor.c_str(), &width, &height, &bitPerPixel, 4);
 
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id); 
