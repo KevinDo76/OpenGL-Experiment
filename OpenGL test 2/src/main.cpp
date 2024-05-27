@@ -98,7 +98,7 @@ int main(void)
     shaderProgram.unbind();
     textureObj.unbind();
 
-    mesh Teapot("resources/object/backroom3.obj");
+    mesh Teapot("resources/object/backroom3.txt");
     //mesh abby("resources/object/abby.txt");
     camera cameraObj;
     material mat(glm::vec3(1), glm::vec3(1), glm::vec3(1), 32);
