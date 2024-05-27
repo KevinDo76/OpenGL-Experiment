@@ -128,7 +128,7 @@ vec3 CalcDirLight(directional_Light light, vec3 normal)
 void main()
 {
     vec4 texColor = texture(u_Texture, v_TexCoord);
-    vec3 texNormal = normalize(v_TBN * ((texture(u_Normal, v_TexCoord).xyz) * 2.f - 1.f));
+    vec3 texNormal = normalize(v_TBN * normalize((texture(u_Normal, v_TexCoord).xyz) * 2.f - 1.f));
 
     vec3 lightingResult = vec3(0,0,0);
 
