@@ -27,12 +27,12 @@ static void replaceText(std::string& src, const std::string& toReplace, const st
     src.replace(pos, toReplace.length(), replaceWith);
 }
 
-static void processFragShader(const std::string& path, std::string& shaderSrc, int pointLightC)
+static void processFragShader(const std::string& path, std::string& shaderSrc, int pointLightC, int dirLightC)
 {
-    std::string lightPointPreprocess = "|LIGHT_COUNT|";
-    std::string lightDirPreprocess = "|DIR_LIGHT_COUNT|";
+    std::string lightPointPreprocess = "\"LIGHT_COUNT\"";
+    std::string lightDirPreprocess = "\"DIR_LIGHT_COUNT\"";
     std::string lightPointCount = std::to_string(pointLightC);
-    std::string lightDirCount = std::to_string(2);
+    std::string lightDirCount = std::to_string(dirLightC);
 
 
     readFile(path, shaderSrc);
@@ -67,22 +67,27 @@ static unsigned int compileShader(const std::string& src, GLenum type)
     return shaderID;
 }
 
-shader::shader(std::string vertexPath, std::string fragPath, float lightPointC, std::string geoPath)
-    :lightPointCount(lightPointC)
+shader::shader(std::string vertexPath, std::string fragPath, int lightPointC, int lightDirC, std::string geoPath)
+    :lightPointCount(lightPointC), lightDirCount(lightDirC)
 {
 
     lightPointArray.reserve(lightPointC);
+    lightDirArray.reserve(lightDirC);
     for (int i = 0; i < lightPointC; i++)
     {
         lightPointArray.emplace_back();
     }
 
+    for (int i = 0; i < lightDirC; i++)
+    {
+        lightDirArray.emplace_back();
+    }
 
     std::string vertexSrc;
     std::string fragmentSrc;
     std::string geometrySrc;
     readFile(vertexPath, vertexSrc);
-    processFragShader(fragPath, fragmentSrc, lightPointCount);
+    processFragShader(fragPath, fragmentSrc, lightPointCount, lightDirC);
     if (geoPath.length() > 0)
     {
         readFile(geoPath, geometrySrc);

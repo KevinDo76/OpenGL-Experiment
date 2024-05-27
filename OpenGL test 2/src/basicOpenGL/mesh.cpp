@@ -67,7 +67,7 @@ mesh::~mesh()
 void mesh::draw(shader& shaderProgram, camera& cameraObj, glm::vec2 dimension, material& mat)
 {
     glm::mat4 model = glm::mat4(1.0f);
-    glm::mat3 modelInverse;
+    glm::mat4 modelInverse;
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 proj = glm::mat4(1.0f);
     glm::mat4 MV;
@@ -98,7 +98,7 @@ void mesh::draw(shader& shaderProgram, camera& cameraObj, glm::vec2 dimension, m
     shaderProgram.setUniformMat4fv("u_Projection", glm::value_ptr(proj));
     shaderProgram.setUniformMat4fv("u_MV", glm::value_ptr(MV));
     shaderProgram.setUniform3f("viewPos", cameraObj.position.x, cameraObj.position.y, cameraObj.position.z);
-    shaderProgram.setUniformMat3fv("u_InverseModel", glm::value_ptr(modelInverse));
+    shaderProgram.setUniformMat4fv("u_InverseModel", glm::value_ptr(modelInverse));
 
     shaderProgram.setUniform3f("material.ambient", mat.ambient.x, mat.ambient.y, mat.ambient.z);
     shaderProgram.setUniform3f("material.diffuse", mat.diffuse.x, mat.diffuse.y, mat.diffuse.z);
@@ -119,6 +119,26 @@ void mesh::draw(shader& shaderProgram, camera& cameraObj, glm::vec2 dimension, m
         shaderProgram.setUniform3f("p_light[" + std::to_string(i) + "].diffuse", diffuse.r, diffuse.g, diffuse.b);
         shaderProgram.setUniform3f("p_light[" + std::to_string(i) + "].specular", specular.r, specular.g, specular.b);
         shaderProgram.setUniform3f("p_light[" + std::to_string(i) + "].position", shaderProgram.lightPointArray[i].position.r, shaderProgram.lightPointArray[i].position.g, shaderProgram.lightPointArray[i].position.b);
+    }
+
+    for (int i = 0; i < shaderProgram.lightDirArray.size(); i++)
+    {
+        glm::vec3 ambient = (shaderProgram.lightDirArray[i].color * shaderProgram.lightDirArray[i].lightPower);
+        glm::vec3 diffuse = shaderProgram.lightDirArray[i].color * shaderProgram.lightDirArray[i].lightPower;
+        glm::vec3 specular = shaderProgram.lightDirArray[i].color * shaderProgram.lightDirArray[i].lightPower;
+
+        ambient *= 0.05;
+        specular *= 0.5;
+
+
+        shaderProgram.setUniform1i("d_light[" + std::to_string(i) + "].activated", ((int)shaderProgram.lightDirArray[i].activated));
+        shaderProgram.setUniform3f("d_light[" + std::to_string(i) + "].ambient", ambient.r, ambient.g, ambient.b);
+        shaderProgram.setUniform3f("d_light[" + std::to_string(i) + "].diffuse", diffuse.r, diffuse.g, diffuse.b);
+        shaderProgram.setUniform3f("d_light[" + std::to_string(i) + "].specular", specular.r, specular.g, specular.b);
+        shaderProgram.setUniform3f("d_light[" + std::to_string(i) + "].position", shaderProgram.lightDirArray[i].position.r, shaderProgram.lightDirArray[i].position.g, shaderProgram.lightDirArray[i].position.b);
+        shaderProgram.setUniform1f("d_light[" + std::to_string(i) + "].cutOffIn", glm::cos(glm::radians((shaderProgram.lightDirArray[i].cutOffIn))));
+        shaderProgram.setUniform1f("d_light[" + std::to_string(i) + "].cutOffOut", glm::cos(glm::radians((shaderProgram.lightDirArray[i].cutOffOut))));
+        shaderProgram.setUniform3f("d_light[" + std::to_string(i) + "].direction", shaderProgram.lightDirArray[i].direction.x, shaderProgram.lightDirArray[i].direction.y, shaderProgram.lightDirArray[i].direction.z);
     }
 
     //shaderProgram.setUniform1f("p_light[0].activated", 1.f);   

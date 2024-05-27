@@ -1,0 +1,32 @@
+# Blender 4.1.0 MTL File: 'backroom4.blend'
+# www.blender.org
+
+newmtl Floor
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd -s 20 20 1 C:/Users/quand/Downloads/Fabric027_2K-PNG/Fabric027_2K-PNG_Color.png
+
+newmtl Wall_Bottom
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.161573 0.800646 0.108068
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Wall_Top
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd -s 1 1 1 C:/Users/quand/Downloads/backroomwall.png

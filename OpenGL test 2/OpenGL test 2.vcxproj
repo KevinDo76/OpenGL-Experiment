@@ -137,7 +137,7 @@
   <ItemGroup>
     <ClCompile Include="src\basicOpenGL\camera.cpp" />
     <ClCompile Include="src\basicOpenGL\indexBuffer.cpp" />
-    <ClCompile Include="src\basicOpenGL\lightPoint.cpp" />
+    <ClCompile Include="src\basicOpenGL\light.cpp" />
     <ClCompile Include="src\basicOpenGL\material.cpp" />
     <ClCompile Include="src\basicOpenGL\mesh.cpp" />
     <ClCompile Include="src\basicOpenGL\objParser.cpp" />
@@ -161,7 +161,7 @@
   <ItemGroup>
     <ClInclude Include="src\basicOpenGL\camera.h" />
     <ClInclude Include="src\basicOpenGL\indexBuffer.h" />
-    <ClInclude Include="src\basicOpenGL\lightPoint.h" />
+    <ClInclude Include="src\basicOpenGL\light.h" />
     <ClInclude Include="src\basicOpenGL\material.h" />
     <ClInclude Include="src\basicOpenGL\mesh.h" />
     <ClInclude Include="src\basicOpenGL\objParser.h" />

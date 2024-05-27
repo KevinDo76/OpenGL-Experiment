@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 camera::camera()
-    :fov(45), near(1.f), far(1000.0f), lookVector(0, 0, -1), position(0), upVector(0, 1, 0), translationSpeed(10), panningSpeed(10000), eulerRotation(0), clickDB(false)
+    :fov(45), near(1.f), far(1000.0f), lookVector(1, 0, 0), position(0), upVector(0, 1, 0), translationSpeed(10), panningSpeed(10000), eulerRotation(0), clickDB(false)
 {
 }
 

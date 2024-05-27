@@ -54,7 +54,7 @@
     <ClCompile Include="src\basicOpenGL\indexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\basicOpenGL\lightPoint.cpp">
+    <ClCompile Include="src\basicOpenGL\light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\basicOpenGL\material.cpp">
@@ -980,7 +980,7 @@
     <ClInclude Include="src\basicOpenGL\indexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\basicOpenGL\lightPoint.h">
+    <ClInclude Include="src\basicOpenGL\light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\basicOpenGL\material.h">

@@ -81,16 +81,17 @@ int main(void)
 
    
 
-    texture textureObj("resources/textures/backroom3.png");
+    texture textureObj("resources/textures/backroom3.png", "resources/textures/backroom3normal.png");
 
-    shader shaderProgram("resources/shaders/default.vert", "resources/shaders/default.frag", 2, "resources/shaders/default.geom");
+    shader shaderProgram("resources/shaders/default.vert", "resources/shaders/default.frag", 2, 2, "resources/shaders/default.geom");
     shaderProgram.setUniform1i("u_Texture", 0);
+    shaderProgram.setUniform1i("u_Normal", 1);
 
 
-    shaderProgram.lightPointArray[0].position = glm::vec3(0, 20, 0);
-    shaderProgram.lightPointArray[0].color = glm::vec3(0.839215686f, 0.870588235f, 0.654901961f);
-    shaderProgram.lightPointArray[0].activated = true;
-    shaderProgram.lightPointArray[0].lightPower = 200;
+    shaderProgram.lightDirArray[0].position = glm::vec3(0, 20, 0);
+    shaderProgram.lightDirArray[0].color = glm::vec3(0.839215686f, 0.870588235f, 0.5f);
+    shaderProgram.lightDirArray[0].activated = true;
+    shaderProgram.lightDirArray[0].lightPower = 200;
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -100,7 +101,7 @@ int main(void)
     mesh Teapot("resources/object/backroom3.obj");
     //mesh abby("resources/object/abby.txt");
     camera cameraObj;
-    material mat(glm::vec3(1), glm::vec3(1), glm::vec3(1), 1000);
+    material mat(glm::vec3(1), glm::vec3(1), glm::vec3(1), 32);
 
 
     /* Loop until the user closes the window */
@@ -116,7 +117,7 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 460");
 
-    float lightPow = 3;
+    float lightPow = 10;
 
     glm::vec3 rotationCube(0);
 
@@ -128,7 +129,9 @@ int main(void)
         double deltaTime = currenTime - lastTime;
         lastTime = currenTime;
 
-        shaderProgram.lightPointArray[0].position = cameraObj.position;
+        //shaderProgram.lightDirArray[0].position = cameraObj.position;
+        shaderProgram.lightDirArray[0].position = cameraObj.position+glm::vec3(0,2,0);
+        shaderProgram.lightDirArray[0].direction = cameraObj.lookVector;
         
         if (!io.WantCaptureMouse)
         {
@@ -148,7 +151,7 @@ int main(void)
         glViewport(0, 0, width, height);
         
         //Teapot.rotation = glm::vec3(count/2.f, count/2.f, 0);
-        Teapot.scale = glm::vec3(2);
+        Teapot.scale = glm::vec3(3);
         //abby.scale = glm::vec3(20);
 
         textureObj.bind();
@@ -156,7 +159,7 @@ int main(void)
         //abby.draw(shaderProgram, cameraObj, glm::vec2(width, height));
         shaderProgram.setUniform3f("material.ambient", mat.ambient.x, mat.ambient.y, mat.ambient.z);
 
-        shaderProgram.lightPointArray[0].lightPower = lightPow;
+        shaderProgram.lightDirArray[0].lightPower = lightPow;
 
         ImGui::Begin("ImGui test");
         ImGui::Text("Open GL test");
@@ -170,7 +173,7 @@ int main(void)
         ImGui::SliderFloat("Z", &rotationCube.z, -180, 180);
         ImGui::End();
 
-        cameraObj.position.y = 1.8*2;
+        //cameraObj.position.y = 1.8*2;
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

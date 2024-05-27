@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include "lightPoint.h"
+#include "light.h"
 #include <vector>
 class shader
 {
 public:
-	shader(std::string vertexPath, std::string fragPath, float lightPointC, std::string geoPath="");
+	shader(std::string vertexPath, std::string fragPath, int lightPointC, int lightDirC, std::string geoPath="");
 	~shader();
 
 	void bind() const;
@@ -21,8 +21,10 @@ public:
 	void setUniformMat3fv(const std::string& name, const float* v);
 
 	std::vector<lightPoint> lightPointArray;
+	std::vector<lighDir> lightDirArray;
 private:
-	const float lightPointCount;
+	const unsigned int lightPointCount;
+	const unsigned int lightDirCount;
 	unsigned int id;
 	std::unordered_map<std::string, int>uniformLocationCache;
 };

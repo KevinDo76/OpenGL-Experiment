@@ -9,13 +9,15 @@ public:
 	void bind(unsigned int slot = 0) const;
 	void unbind() const;
 
-	inline int getWidth() const { return width; }
-	inline int getHeight() const { return height; }
+	inline int getWidthColor() const { return colorWidth; }
+	inline int getHeightColor() const { return colorHeight; }
 
 private:
 	std::string path;
-	unsigned int id;
+	unsigned int ColorID;
+	unsigned int NormalID;
 	unsigned char* dataBuffer;
-	int width, height, bitPerPixel;
+	int colorWidth, colorHeight, colorBitPerPixel;
+	int normalWidth, normalHeight, normalBitPerPixel;
 };
 
