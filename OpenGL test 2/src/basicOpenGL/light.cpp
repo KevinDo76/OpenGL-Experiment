@@ -7,6 +7,6 @@ lightPoint::lightPoint()
 }
 
 lighDir::lighDir()
-	:activated(false), lightPower(100), position(0), color(1), direction(0), cutOffIn(17.5f), cutOffOut(20.5)
+	:activated(false), lightPower(100), position(0), color(1), direction(0), cutOffIn(17.5f), cutOffOut(2455)
 {
 }

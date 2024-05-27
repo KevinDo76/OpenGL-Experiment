@@ -77,7 +77,7 @@ int main(void)
     glEnable(GL_BLEND);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_FRAMEBUFFER_SRGB); 
-    //glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
 
    
 
@@ -117,9 +117,16 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 460");
 
-    float lightPow = 10;
+    float lightPow = 100;
 
     glm::vec3 rotationCube(0);
+
+    //unsigned int fbo;
+    //glGenFramebuffers(1, &fbo);
+    //glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    //
+    //if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+    //    std::cout << "ok blood\n";
 
     while (!glfwWindowShouldClose(window))
     {
@@ -130,13 +137,15 @@ int main(void)
         lastTime = currenTime;
 
         //shaderProgram.lightDirArray[0].position = cameraObj.position;
-        shaderProgram.lightDirArray[0].position = cameraObj.position+glm::vec3(0,2,0);
+        shaderProgram.lightDirArray[0].position = cameraObj.position + cameraObj.lookVector + glm::vec3(0,-1,0);
         shaderProgram.lightDirArray[0].direction = cameraObj.lookVector;
         
         if (!io.WantCaptureMouse)
         {
             cameraObj.cameraUpdateInput(window, deltaTime);
         }
+
+        cameraObj.position.y = 5;
 
         Teapot.rotation = rotationCube;
         

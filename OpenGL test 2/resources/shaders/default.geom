@@ -16,7 +16,6 @@ in DATA
     vec2 texCoord;
     mat4 projection;
     mat4 model;
-    mat4 inverseModel;
 } data_in[];
 
 void main()
@@ -37,11 +36,8 @@ void main()
     vec3 T = normalize(vec3(data_in[0].model * vec4(tangent,0.f)));
     vec3 B = normalize(vec3(data_in[0].model * vec4(bitangent,0.f)));
     vec3 N = normalize(vec3(data_in[0].model * surfaceNormal));
-    
 
-    mat3 TBN = mat3(T,B,N);
-
-    //TBN = transpose(TBN);
+    mat3 TBN = mat3(T,B,N); //calculating tbn for normal mapping
 
     for (int i=0;i<3;i++)
     {

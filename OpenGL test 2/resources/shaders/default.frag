@@ -1,22 +1,30 @@
 #version 460 core
 
+
 out vec4 fragColor;
+
+//Data from CPU
 uniform vec3 viewPos;
 uniform sampler2D u_Texture;
 uniform sampler2D u_Normal;
 
+
+//Data from geometry shader
 in vec2 v_TexCoord;
 in vec3 v_Normal;
 in vec3 v_fragPos;
 in mat3 v_TBN;
 
+
+//Material property
 struct Material {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
     float shininess;
 }; 
-  
+
+
 #define POINT_LIGHT_COUNT "LIGHT_COUNT"
 struct point_Light {
     int activated;
@@ -26,10 +34,12 @@ struct point_Light {
     vec3 diffuse;
     vec3 specular;
 
+    //Deprecated, using d^2 instead
     float constant;
     float linear;
     float quadratic;
 };
+
 
 #define DIRECTIONAL_LIGHT_COUNT "DIR_LIGHT_COUNT"
 struct directional_Light {
@@ -44,11 +54,12 @@ struct directional_Light {
     vec3 specular;
 };
 
+//Light and material data from CPU
 uniform point_Light p_light[POINT_LIGHT_COUNT];  
-
 uniform directional_Light d_light[DIRECTIONAL_LIGHT_COUNT];  
-
 uniform Material material;
+
+
 
 vec3 CalcPointLight(point_Light light, vec3 normal)
 {
@@ -105,7 +116,6 @@ vec3 CalcDirLight(directional_Light light, vec3 normal)
     ambient = clamp(ambient,0.0f, 0.2f);
 
     float lightDistance    = length(light.position - v_fragPos);
-    //float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));   
     float attenuation = 1/(lightDistance * lightDistance); 
 
     ambient*=attenuation;
@@ -139,4 +149,5 @@ void main()
     }
 
     fragColor = vec4(lightingResult, 1) * texColor;
+    //fragColor = vec4(texNormal,1);
 }
